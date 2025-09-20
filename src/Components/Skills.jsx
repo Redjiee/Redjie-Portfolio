@@ -1,65 +1,70 @@
-import { motion } from "framer-motion";
-
-const skills = [
-  { name: "React.js", level: 92 },
-  { name: "TailwindCSS", level: 90 },
-  { name: "JavaScript (ES6+)", level: 93 },
-  { name: "HTML & CSS", level: 95 },
-  { name: "Git / GitHub", level: 90 },
-  { name: "Next.js", level: 87 },
-  { name: "Node.js", level: 80 },
-  { name: "PHP / MySQL", level: 85 },
-  { name: "Figma", level: 84 },
-  { name: "Vite", level: 87 },
-  { name: "TypeScript", level: 82 },
-  { name: "Python (Flask/Django)", level: 81 },
-  { name: "AI / IoT Integration", level: 78 },
-  { name: "SQL (SQLite, MySQL)", level: 83 },
-];
+import React from "react";
+import { FaReact, FaNodeJs, FaPython, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker } from "react-icons/fa";
+import { SiTailwindcss, SiMysql, SiFigma, SiVite, SiTypescript, SiNextdotjs, SiJavascript, SiFlask } from "react-icons/si";
 
 function Skills() {
-  return (
-    <section id="skills" className="bg-dark-bg px-6 py-16 min-h-screen flex items-center justify-center">
-      <div className="max-w-5xl w-full">
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center text-white mb-12"
-        >
-          Skills & Expertise
-        </motion.h2>
-        <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">
-          A focused list of the technologies I use most and how confident I am with each — based on real projects and hands-on work.
-        </p>
+  const skills = [
+    { name: "React.js", icon: <FaReact size={65} className="text-[#61DBFB]" /> },
+    { name: "TailwindCSS", icon: <SiTailwindcss size={65} className="text-[#38BDF8]" /> },
+    { name: "JavaScript", icon: <SiJavascript size={65} className="text-yellow-400" /> },
+    { name: "HTML5", icon: <FaHtml5 size={65} className="text-orange-500" /> },
+    { name: "CSS3", icon: <FaCss3Alt size={65} className="text-blue-500" /> },
+    { name: "Git / GitHub", icon: <FaGitAlt size={65} className="text-orange-400" /> },
+    { name: "Next.js", icon: <SiNextdotjs size={65} className="text-white" /> },
+    { name: "Node.js", icon: <FaNodeJs size={65} className="text-green-500" /> },
+    { name: "MySQL", icon: <SiMysql size={65} className="text-blue-600" /> },
+    { name: "Figma", icon: <SiFigma size={65} className="text-pink-500" /> },
+    { name: "Vite", icon: <SiVite size={65} className="text-purple-500" /> },
+    { name: "TypeScript", icon: <SiTypescript size={65} className="text-blue-400" /> },
+    { name: "Python", icon: <FaPython size={65} className="text-yellow-300" /> },
+    { name: "Flask", icon: <SiFlask size={65} className="text-white" /> },
+    { name: "Docker", icon: <FaDocker size={65} className="text-blue-400" /> },
+  ];
 
-        {/* Skills List */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {skills.map((skill, index) => (
-            <motion.div
+  return (
+    <section
+      id="skills"
+      className="bg-dark-bg px-6 py-16 min-h-screen flex flex-col items-center overflow-hidden"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
+        Tech Stack
+      </h2>
+
+      {/* Mechanical Keyboard Grid */}
+      <div className="relative [transform:rotateX(25deg)_rotateY(-15deg)] perspective-1000">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {skills.map((skill) => (
+            <div
               key={skill.name}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="bg-[#0D1B2A]/70 p-6 rounded-xl shadow-lg border border-[#58A6FF]/20"
+              className="relative flex flex-col items-center justify-center space-y-2 w-40 h-40 
+                         bg-gradient-to-b from-[#1B263B] to-[#0D1B2A] 
+                         border border-[#1E2A3A] rounded-xl
+                         shadow-[0_12px_0_0_#1E2A3A,0_20px_30px_rgba(0,0,0,0.9)] 
+                         hover:translate-y-[8px] hover:shadow-[0_6px_0_0_#1E2A3A,0_12px_20px_rgba(0,0,0,0.7)] 
+                         transition-all duration-300 overflow-hidden"
             >
-              <div className="flex justify-between mb-2">
-                <span className="text-white font-medium">{skill.name}</span>
-                <span className="text-[#58A6FF] font-semibold">{skill.level}%</span>
-              </div>
-              <div className="w-full bg-gray-700 rounded-full h-3">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1.2, ease: "easeInOut" }}
-                  className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] h-3 rounded-full shadow-md"
-                />
-              </div>
-            </motion.div>
+              {/* Shine Effect */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent 
+                               translate-x-[-100%] animate-shine" />
+
+              {skill.icon}
+              <span className="text-white text-sm font-medium">{skill.name}</span>
+            </div>
           ))}
         </div>
       </div>
+
+      {/* Shine Animation Keyframes */}
+      <style>{`
+        @keyframes shine {
+          0% { transform: translateX(-100%); }
+          60% { transform: translateX(150%); }
+          100% { transform: translateX(150%); }
+        }
+        .animate-shine {
+          animation: shine 3s infinite;
+        }
+      `}</style>
     </section>
   );
 }
